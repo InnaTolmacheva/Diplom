@@ -12,8 +12,6 @@ public class DataHelper {
     public DataHelper() {
     }
 
-    ;
-
     @Value
     public static class CardInfo {
         private String number;
@@ -25,6 +23,7 @@ public class DataHelper {
     }
 
     public static CardInfo getDeclinedCardInfo() {
+
         return new CardInfo("4444 4444 4444 4442", "DECLINED");
     }
 
@@ -55,5 +54,24 @@ public class DataHelper {
         }
     }
 
+    @SneakyThrows
+    public static void cleanDataBases() {
+        var runner = new QueryRunner();
+        String cleanOrderEntity = "DELETE FROM order_entity;";
+        String cleanPaymentEntity = "DELETE FROM payment_entity;";
+        String cleanCreditRequestEntity = "DELETE FROM credit_request_entity;";
+
+
+        try (
+                Connection conn = DriverManager.getConnection(
+                        "jdbc:mysql://localhost:3306/app", "app", "pass"
+                );
+        ) {
+
+            runner.update(conn, cleanOrderEntity);
+            runner.update(conn, cleanPaymentEntity);
+            runner.update(conn, cleanCreditRequestEntity);
+        }
+    }
 
 }

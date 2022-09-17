@@ -1,14 +1,21 @@
-
 plugins {
     id 'java'
+    id 'io.qameta.allure' version '2.9.6'
 }
 
 group 'ru.netology'
 version '1.0-SNAPSHOT'
+sourceCompatibility = 11
 // кодировка файлов (если используете русский язык в файлах)
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
 
+allure {
+    version = '2.16.1'
+    useJUnit5 {
+        version = '2.16.1'
+    }
+}
 repositories {
     mavenCentral()
 }
@@ -20,6 +27,7 @@ dependencies {
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     testImplementation 'com.codeborne:selenide:6.6.3'
+    testImplementation 'io.rest-assured:json-schema-validator:4.3.1'
 
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
@@ -28,6 +36,10 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
     implementation group: 'com.github.javafaker', name: 'javafaker', version: '1.0.2'
     implementation 'org.springframework:spring-jdbc:4.3.10.RELEASE'
+    testImplementation 'io.qameta.allure:allure-selenide:2.16.1'
+
+    testImplementation 'io.rest-assured:rest-assured:4.3.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.6.1'
 
 
 }
@@ -36,3 +48,4 @@ test {
     useJUnitPlatform()
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
 }
+

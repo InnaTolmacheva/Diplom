@@ -42,6 +42,9 @@
     <connection id="05893548-67cc-44db-947e-c1b98db13361" />
     <connection id="0cd28f9c-0346-4073-8a53-e7f3e4b60e0c" />
   </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="05893548-67cc-44db-947e-c1b98db13361" dataset="app.order_entity" active-filter-id="EMPTY_FILTER" />
+  </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
   </component>
