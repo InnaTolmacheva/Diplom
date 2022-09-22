@@ -27,21 +27,21 @@ public class DataGenerator {
 
     public static String getInvalidMonth() {
         Random random = new Random();
-        final String[] months = {"00", "13", "14", "15", "16"};
+        final String[] months = {"00", "13", "1"};
         int pos = random.nextInt(months.length);
         String newMonth = months[pos];
         return newMonth;
     }
 
     public static String getYear() {
-        LocalDate newDate = LocalDate.now().plusMonths(14); //сдвиг даты а 14 месяцев
+        LocalDate newDate = LocalDate.now().plusYears(3); //сдвиг на 3 года вреред
         String newYear2 = String.valueOf(Integer.parseInt(String.valueOf(newDate.getYear()).substring(2, 4)));//
         return newYear2;
     }
 
     // вводим год предшествующий текущему
     public static String getInvalidYear() {
-        LocalDate newDate = LocalDate.now().minusMonths(14); //сдвиг даты на 14 месяцев
+        LocalDate newDate = LocalDate.now().minusMonths(14); //сдвиг даты на 14 месяцев назад
         String newYear2 = String.valueOf(Integer.parseInt(String.valueOf(newDate.getYear()).substring(2, 4)));//
         return newYear2;
     }
@@ -54,6 +54,12 @@ public class DataGenerator {
 
     public static String getName() {
         Faker faker = new Faker(new Locale("en"));
+        String name = String.valueOf(faker.name().name());
+
+        return name;
+    }
+    public static String getInvalidName() {
+        Faker faker = new Faker(new Locale("ru"));
         String name = String.valueOf(faker.name().name());
 
         return name;

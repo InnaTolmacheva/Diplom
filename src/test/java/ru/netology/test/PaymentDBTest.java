@@ -73,7 +73,7 @@ public class PaymentDBTest {
     }
 
     @Test
-        // пользователь ввел валидные данные во все поля - банк отклонил операцию (покупка в кредит)
+        // пользователь ввел валидные данные во все поля - банк отклонил операцию (оплата картой)
     void negativePaymentTest() { //throws InterruptedException {
         StartingPage startingPage = new StartingPage();
         PaymentPage paymentPage = startingPage.goToPaymentPage();
@@ -87,6 +87,7 @@ public class PaymentDBTest {
     }
 
     @Test
+        // пользователь ввел валидные данные во все поля - операция одобрена банком (покупка в кредит)
     void positiveCreditTest() {
         StartingPage startingPage = new StartingPage();
         CreditPage creditPage = startingPage.goToCreditPage();
@@ -100,6 +101,7 @@ public class PaymentDBTest {
     }
 
     @Test
+        // пользователь ввел валидные данные во все поля - банк отклонил операцию (покупка в кредит)
     void negativeCreditTest() {
         StartingPage startingPage = new StartingPage();
         CreditPage creditPage = startingPage.goToCreditPage();

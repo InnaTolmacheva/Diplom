@@ -129,6 +129,13 @@ public class PaymentUITest {
         PaymentPage cardPage = PaymentPage.inputYearAboveFive();
         $(".input__sub").should(ownText("Неверно указан срок действия карты"));
     }
+    @Test // пользователь ввел имя владельца карты кирилицей - оплата картой
+    public void invalidName() {
+        StartingPage startingPage = new StartingPage();
+        PaymentPage paymentPage = startingPage.goToPaymentPage();
+        PaymentPage cardPage = PaymentPage.inputInvalidName();
+        $(".input__sub").should(ownText("Неверный формат"));
+    }
 
     @Test // пользователь ввел неверный CVV - оплата картой
     public void invalidCVV() {
@@ -211,12 +218,19 @@ public class PaymentUITest {
         $(".input__sub").should(ownText("Истёк срок действия карты"));
     }
 
-    @Test // пользователь ввел неверный номер года (свыше 5 лет) - оплата картой
+    @Test // пользователь ввел неверный номер года (свыше 5 лет) - покупка в кредит
     public void invalidCreditYearAboveFiveYear() {
         StartingPage startingPage = new StartingPage();
         CreditPage creditPage = startingPage.goToCreditPage();
         CreditPage cardPage = CreditPage.inputYearAboveFive();
         $(".input__sub").should(ownText("Неверно указан срок действия карты"));
+    }
+    @Test // пользователь ввел имя владельца карты кирилицей - покупка в кредит
+    public void invalidCreditName() {
+        StartingPage startingPage = new StartingPage();
+        CreditPage creditPage = startingPage.goToCreditPage();
+        CreditPage cardPage = CreditPage.inputInvalidName();
+        $(".input__sub").should(ownText("Неверный формат"));
     }
 
     @Test // пользователь ввел неверный CVV - покупка в кредит

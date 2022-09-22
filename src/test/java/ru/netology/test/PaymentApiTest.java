@@ -30,14 +30,13 @@ class PaymentApiTest {
 
     @Test
         // должен отправляться запрос на оплату корректной картой
-
     void shouldSendPaymentRequestWithApprovedCard() {
         int statusCode = DataGenerator.getRequestStatusCode(ValidApprovedCard, "/api/v1/pay");
         assertEquals(200, statusCode);
     }
 
     @Test
-        // должен отправляться запрос на покупку в кредит с корректной картой"
+        // должен отправляться запрос на покупку в кредит с корректной картой
     void shouldSendCreditRequestWithApprovedCard() {
         int statusCode = DataGenerator.getCreditStatusCode(ValidApprovedCard, "/api/v1/credit");
         assertEquals(200, statusCode);
