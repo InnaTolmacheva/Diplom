@@ -101,11 +101,24 @@ public class PaymentDBTest {
     }
 
     @Test
-        // пользователь ввел валидные данные во все поля - банк отклонил операцию (покупка в кредит)
-    void negativeCreditTest() {
+        // пользователь ввел валидные данные для несуществующей карты во все поля - банк отклонил операцию (оплата картой)
+    void negativePaymentTestWithInvalidCard() {
+        StartingPage startingPage = new StartingPage();
+        PaymentPage paymentPage = startingPage.goToPaymentPage();
+        PaymentPage cardPage = PaymentPage.inputData("4444 4444 4444 4440");
+        $(".notification__content").should(ownText("Ошибка! Банк отказал в проведении операции."), Duration.ofSeconds(30));
+
+        String actual = DataHelper.getPaymentStatus();
+        String expected = DataHelper.getDeclinedCardInfo().getStatus();
+        Assertions.assertEquals(expected, actual);
+
+    }
+    @Test
+        // пользователь ввел валидные данные для несуществующей карты во все поля - банк отклонил операцию (покупка в кредит)
+    void negativeCreditTestWithInvalidCard() {
         StartingPage startingPage = new StartingPage();
         CreditPage creditPage = startingPage.goToCreditPage();
-        CreditPage cardPage = CreditPage.inputData("4444 4444 4444 4442");
+        CreditPage cardPage = CreditPage.inputData("4444 4444 4444 4443");
         $(".notification__content").should(ownText("Ошибка! Банк отказал в проведении операции."), Duration.ofSeconds(30));
 
         String actual = DataHelper.getCreditStatus();

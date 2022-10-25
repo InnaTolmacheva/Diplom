@@ -58,7 +58,7 @@ public class PaymentUITest {
 
     }
 
-    @Test // пользователь не ввел номер карты - оплата картой
+    @Test
     public void emptyCard() {
         StartingPage startingPage = new StartingPage();
         PaymentPage paymentPage = startingPage.goToPaymentPage();
@@ -111,7 +111,7 @@ public class PaymentUITest {
         StartingPage startingPage = new StartingPage();
         PaymentPage paymentPage = startingPage.goToPaymentPage();
         PaymentPage cardPage = PaymentPage.inputInvalidMonth();
-        $(".input__sub").should(ownText("Неверно указан срок действия карты"));
+        $(".input__sub").should(ownText("Неверный формат"));
     }
 
     @Test // пользователь ввел неверный номер года - оплата картой
@@ -207,7 +207,7 @@ public class PaymentUITest {
         StartingPage startingPage = new StartingPage();
         CreditPage creditPage = startingPage.goToCreditPage();
         CreditPage cardPage = CreditPage.inputInvalidMonth();
-        $(".input__sub").should(ownText("Неверно указан срок действия карты"));
+        $(".input__sub").should(ownText("Неверный формат"));
     }
 
     @Test // пользователь ввел неверный номер года - покупка в кредит

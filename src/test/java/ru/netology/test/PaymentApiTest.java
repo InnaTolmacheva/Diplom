@@ -55,9 +55,14 @@ class PaymentApiTest {
         int statusCode = DataGenerator.getCreditStatusCode(ValidDeclinedCard, "/api/v1/credit");
         assertEquals(200, statusCode);
     }
-
     @Test
-        // Не должен отправляться запрос на покупку в кредит с корректной картой"
+        // Не должен отправляться запрос на покупку в кредит с некорректной картой"
+    void shouldNotSendPaymentRequestWithInvalidCard() {
+        int statusCode = DataGenerator.getInvalidCode(InvalidCard, "/api/v1/pay");
+        assertNotEquals(200, statusCode);
+    }
+    @Test
+        // Не должен отправляться запрос на покупку в кредит с некорректной картой"
     void shouldNotSendCreditRequestWithInvalidCard() {
         int statusCode = DataGenerator.getInvalidCode(InvalidCard, "/api/v1/credit");
         assertNotEquals(200, statusCode);

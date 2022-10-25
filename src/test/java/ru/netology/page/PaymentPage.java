@@ -67,6 +67,7 @@ public class PaymentPage {
         cardNumber.setValue("4444 4444 4444 4441");
         month.setValue(DataGenerator.getMonth());
         year.setValue(DataGenerator.getYear());
+        owner.setValue(DataGenerator.getInvalidName());
         code.setValue(DataGenerator.getCVV());
         continued.click();
         return null;

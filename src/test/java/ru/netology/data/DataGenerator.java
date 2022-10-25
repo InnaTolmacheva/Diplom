@@ -27,11 +27,20 @@ public class DataGenerator {
 
     public static String getInvalidMonth() {
         Random random = new Random();
-        final String[] months = {"00", "13", "1"};
+        final String[] months = {"00", "13"};
         int pos = random.nextInt(months.length);
         String newMonth = months[pos];
         return newMonth;
     }
+
+    public static String getInvalidFormatMonth() {
+        Random random = new Random();
+        final String[] months = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        int pos = random.nextInt(months.length);
+        String newMonth = months[pos];
+        return newMonth;
+    }
+
 
     public static String getYear() {
         LocalDate newDate = LocalDate.now().plusYears(3); //сдвиг на 3 года вреред
