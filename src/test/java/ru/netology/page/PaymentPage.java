@@ -21,10 +21,10 @@ public class PaymentPage {
     public PaymentPage() {
         header.shouldBe(visible);
     }
-    public static PaymentPage notificationOkIsVisible() throws InterruptedException {
-        notificationOK.wait(1200);                     //shouldBe(visible, 12000);
+    /*public static PaymentPage notificationOkIsVisible() throws InterruptedException {
+        notificationOK.wait(1200);
         return null;
-    }
+    }*/
     public static PaymentPage inputData(String number) {
         cardNumber.setValue(number);
         month.setValue(DataGenerator.getMonth());
@@ -38,6 +38,15 @@ public class PaymentPage {
     public static PaymentPage inputInvalidMonth() {
         cardNumber.setValue("4444 4444 4444 4441");
         month.setValue(DataGenerator.getInvalidMonth());
+        year.setValue(DataGenerator.getYear());
+        owner.setValue(DataGenerator.getName());
+        code.setValue(DataGenerator.getCVV());
+        continued.click();
+        return null;
+    }
+    public static PaymentPage inputInvalidFormatMonth() {
+        cardNumber.setValue("4444 4444 4444 4441");
+        month.setValue(DataGenerator.getInvalidFormatMonth());
         year.setValue(DataGenerator.getYear());
         owner.setValue(DataGenerator.getName());
         code.setValue(DataGenerator.getCVV());

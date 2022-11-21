@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import ru.netology.data.DBHelper;
 import ru.netology.data.DataHelper;
 import ru.netology.page.CreditPage;
 import ru.netology.page.PaymentPage;
@@ -34,12 +35,13 @@ public class PaymentDBTest {
 
     @AfterAll
     static void cleanUp() {
-        DataHelper.cleanDataBases();
+        DBHelper.cleanDataBases();
     }
 
     @BeforeEach
     void setUp2() {
-        open("http://localhost:8080");
+        String url = System.getProperty("sut.url");
+        open(url);
         Configuration.holdBrowserOpen = true;
     }
 
@@ -66,7 +68,7 @@ public class PaymentDBTest {
         PaymentPage cardPage = PaymentPage.inputData("4444 4444 4444 4441");
         $(".notification__content").should(ownText("Операция одобрена Банком."), Duration.ofSeconds(30));
 
-        String actual = DataHelper.getPaymentStatus();
+        String actual = DBHelper.getPaymentStatus();
         String expected = DataHelper.getApprovedCardInfo().getStatus();
         Assertions.assertEquals(expected, actual);
 
@@ -74,13 +76,13 @@ public class PaymentDBTest {
 
     @Test
         // пользователь ввел валидные данные во все поля - банк отклонил операцию (оплата картой)
-    void negativePaymentTest() { //throws InterruptedException {
+    void negativePaymentTest() {
         StartingPage startingPage = new StartingPage();
         PaymentPage paymentPage = startingPage.goToPaymentPage();
         PaymentPage cardPage = PaymentPage.inputData("4444 4444 4444 4442");
         $(".notification__content").should(ownText("Ошибка! Банк отказал в проведении операции."), Duration.ofSeconds(30));
 
-        String actual = DataHelper.getPaymentStatus();
+        String actual = DBHelper.getPaymentStatus();
         String expected = DataHelper.getDeclinedCardInfo().getStatus();
         Assertions.assertEquals(expected, actual);
 
@@ -94,7 +96,7 @@ public class PaymentDBTest {
         CreditPage cardPage = CreditPage.inputData("4444 4444 4444 4441");
         $(".notification__content").should(ownText("Операция одобрена Банком."), Duration.ofSeconds(30));
 
-        String actual = DataHelper.getCreditStatus();
+        String actual = DBHelper.getCreditStatus();
         String expected = DataHelper.getApprovedCardInfo().getStatus();
         Assertions.assertEquals(expected, actual);
 
@@ -108,7 +110,7 @@ public class PaymentDBTest {
         PaymentPage cardPage = PaymentPage.inputData("4444 4444 4444 4440");
         $(".notification__content").should(ownText("Ошибка! Банк отказал в проведении операции."), Duration.ofSeconds(30));
 
-        String actual = DataHelper.getPaymentStatus();
+        String actual = DBHelper.getPaymentStatus();
         String expected = DataHelper.getDeclinedCardInfo().getStatus();
         Assertions.assertEquals(expected, actual);
 
@@ -121,7 +123,7 @@ public class PaymentDBTest {
         CreditPage cardPage = CreditPage.inputData("4444 4444 4444 4443");
         $(".notification__content").should(ownText("Ошибка! Банк отказал в проведении операции."), Duration.ofSeconds(30));
 
-        String actual = DataHelper.getCreditStatus();
+        String actual = DBHelper.getCreditStatus();
         String expected = DataHelper.getDeclinedCardInfo().getStatus();
         Assertions.assertEquals(expected, actual);
 

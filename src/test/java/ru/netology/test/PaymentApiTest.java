@@ -5,6 +5,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import ru.netology.data.ApiHelper;
 import ru.netology.data.Card;
 import ru.netology.data.DataGenerator;
 
@@ -31,40 +32,40 @@ class PaymentApiTest {
     @Test
         // должен отправляться запрос на оплату корректной картой
     void shouldSendPaymentRequestWithApprovedCard() {
-        int statusCode = DataGenerator.getRequestStatusCode(ValidApprovedCard, "/api/v1/pay");
+        int statusCode = ApiHelper.getRequestStatusCode(ValidApprovedCard, "/api/v1/pay");
         assertEquals(200, statusCode);
     }
 
     @Test
         // должен отправляться запрос на покупку в кредит с корректной картой
     void shouldSendCreditRequestWithApprovedCard() {
-        int statusCode = DataGenerator.getCreditStatusCode(ValidApprovedCard, "/api/v1/credit");
+        int statusCode = ApiHelper.getCreditStatusCode(ValidApprovedCard, "/api/v1/credit");
         assertEquals(200, statusCode);
     }
 
     @Test
         // должен отправляться запрос на оплату корректной картой
     void shouldSendPaymentRequestWithDeclinedCard() {
-        int statusCode = DataGenerator.getRequestStatusCode(ValidDeclinedCard, "/api/v1/pay");
+        int statusCode = ApiHelper.getRequestStatusCode(ValidDeclinedCard, "/api/v1/pay");
         assertEquals(200, statusCode);
     }
 
     @Test
         // должен отправляться запрос на покупку в кредит с корректной картой"
     void shouldSendCreditRequestWithDeclinedCard() {
-        int statusCode = DataGenerator.getCreditStatusCode(ValidDeclinedCard, "/api/v1/credit");
+        int statusCode = ApiHelper.getCreditStatusCode(ValidDeclinedCard, "/api/v1/credit");
         assertEquals(200, statusCode);
     }
     @Test
         // Не должен отправляться запрос на покупку в кредит с некорректной картой"
     void shouldNotSendPaymentRequestWithInvalidCard() {
-        int statusCode = DataGenerator.getInvalidCode(InvalidCard, "/api/v1/pay");
+        int statusCode = ApiHelper.getInvalidCode(InvalidCard, "/api/v1/pay");
         assertNotEquals(200, statusCode);
     }
     @Test
         // Не должен отправляться запрос на покупку в кредит с некорректной картой"
     void shouldNotSendCreditRequestWithInvalidCard() {
-        int statusCode = DataGenerator.getInvalidCode(InvalidCard, "/api/v1/credit");
+        int statusCode = ApiHelper.getInvalidCode(InvalidCard, "/api/v1/credit");
         assertNotEquals(200, statusCode);
     }
 }

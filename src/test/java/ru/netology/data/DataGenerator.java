@@ -88,49 +88,8 @@ public class DataGenerator {
         return CVV;
     }
 
-    static RequestSpecification requestSpec = new RequestSpecBuilder()
-            .setBaseUri("http://localhost")
-            .setPort(8080)
-            .setAccept(ContentType.JSON)
-            .setContentType(ContentType.JSON)
-            .log(LogDetail.ALL)
-            .build();
 
-    public static int getRequestStatusCode(Card card, String path) {
-        int statusCode =
-                given()
-                        .spec(requestSpec)
-                        .body(card)
-                        .when()
-                        .post(path)
-                        .getStatusCode();
-        System.out.println(statusCode);
-        return statusCode;
-    }
 
-    public static int getCreditStatusCode(Card card, String path) {
-        int statusCode =
-                given()
-                        .spec(requestSpec)
-                        .body(card)
-                        .when()
-                        .post(path)
-                        .getStatusCode();
-        System.out.println(statusCode);
-        return statusCode;
-    }
-
-    public static int getInvalidCode(Card card, String path) {
-        int statusCode =
-                given()
-                        .spec(requestSpec)
-                        .body(card)
-                        .when()
-                        .post(path)
-                        .getStatusCode();
-        System.out.println(statusCode);
-        return statusCode;
-    }
 
     public static Card getValidApprovedCard() {
         return new Card("4444 4444 4444 4441", "12", "24", "Client bank", "987");

@@ -30,7 +30,8 @@ public class PaymentUITest {
 
     @BeforeEach
     void setUp2() {
-        open("http://localhost:8080");
+        String url = System.getProperty("sut.url");
+        open(url);
         Configuration.holdBrowserOpen = true;
     }
 
@@ -111,6 +112,13 @@ public class PaymentUITest {
         StartingPage startingPage = new StartingPage();
         PaymentPage paymentPage = startingPage.goToPaymentPage();
         PaymentPage cardPage = PaymentPage.inputInvalidMonth();
+        $(".input__sub").should(ownText("Неверный формат"));
+    }
+
+    public void invalidFormatMonth() {
+        StartingPage startingPage = new StartingPage();
+        PaymentPage paymentPage = startingPage.goToPaymentPage();
+        PaymentPage cardPage = PaymentPage.inputInvalidFormatMonth();
         $(".input__sub").should(ownText("Неверный формат"));
     }
 
